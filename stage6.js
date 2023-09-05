@@ -3,8 +3,8 @@ class Stage6Class {
         this.myScale = 0.3;
         this.heightOffset = canvas.height/this.myScale/5*2;
         this.titleOffset = canvas.height/5;
-        this.screen_w = 128;
-        this.screen_h = 80;
+        this.screen_w = 160;
+        this.screen_h = 100;
 
         this.reset();
        
@@ -141,7 +141,7 @@ class Stage6Class {
         scale = this.myScale;
         originY+=this.heightOffset;
         originX+=canvas.width/scale/5*3;
-        this.triangle_TAA.modulationFactor = 0.15;
+        this.triangle_TAA.modulationFactor = 0.2;
         this.triangle_TAA.drawProcessedPixels_simple(-angle);
         scale = scale_temp;
         originX = originX_temp;

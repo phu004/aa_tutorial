@@ -111,13 +111,13 @@ class Triangle_TAA {
                     let currentColor = this.currentFrame[i].pixelColor;
                     let nearColorsHex  = [this.currentFrame[i + 1].pixelColor, this.currentFrame[i + this.w].pixelColor, this.currentFrame[i - 1].pixelColor, this.currentFrame[i - this.w].pixelColor]
                     historyColor = getClampedColor(currentColor, nearColorsHex, historyColor);
-                    const distance = colorDistance(historyColor, currentColor);
+                    //const distance = colorDistance(historyColor, currentColor);
                     //if(distance > this.motion_threshold)
                     //    historyColor = currentColor;
                     this.blendFrame[i].pixelColor = "#" + lerpColor(historyColor.slice(1), currentColor.slice(1), this.modulationFactor);
                     this.blendFrame[i].blendingStage = 0;
                 }else{
-                    let historyColor = this.previousFrame[i].pixelColor;
+                    /*let historyColor = this.previousFrame[i].pixelColor;
                     let currentColor = this.currentFrame[i].pixelColor;
                     if(historyColor == "#A3D8EF" && currentColor == "#A3D8EF"){
                         this.blendFrame[i].blendingStage = 0;
@@ -130,7 +130,7 @@ class Triangle_TAA {
                     if(distance > this.stillness_threshold)
                         historyColor = currentColor;
                     this.blendFrame[i].pixelColor = "#" + lerpColor(historyColor.slice(1), currentColor.slice(1), this.modulationFactor);
-                    this.blendFrame[i].blendingStage = 0;
+                    this.blendFrame[i].blendingStage = 0;*/
                 }
 
             }
