@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浅入深出，带你了解抗锯齿</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<script src="utility.js"></script>
+<script src="textDrawer.js"></script>
+<script src="triangle_SSAA.js"></script>
+<script src="triangle_MSAA.js"></script>
+<script src="triangle_TAA.js"></script>
+<script src="triangle_FXAA.js"></script>
+<script src="pixel.js"></script>
+<script src="pixel_TAA.js"></script>
+<script src="title.js"></script>
+<script>
+  const canvas = document.getElementById('myCanvas');
+  var ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = canvas.width * 0.625;
+  var stage = 1;
+  var maxStage = 6;
+  var stageInstance = 'stage' + stage + 'Instance';
+  var originX = 0;
+  var originY = 0;
+  var scale = 1;
+
+  for (var i = 1; i <= maxStage; i++) { // Adjust the range as needed for your stages
+    var script = document.createElement('script');
+    script.src = 'stage' + i + '.js';
+    document.head.appendChild(script);
+  }
+
+  let frames = 0;
+  let lastTimestamp = performance.now();
+
+  function draw() {
+    // Clear the canvas
+    canvas.width = canvas.width; // This clears the canvas   
+    window[stageInstance].doSomething();
+
+    // Calculate elapsed time and FPS
+    const currentTimestamp = performance.now();
+    const elapsed = currentTimestamp - lastTimestamp;
+    lastTimestamp = currentTimestamp;
+  }
+
+  // Call the draw function every 20 milliseconds
+  setInterval(draw, 20);
+
+  // Add key listener
+  window.addEventListener('keydown', (event) => {
+    const keyCode = event.keyCode;
+    if (keyCode === 38) { // Up arrow key
+        if(stage > 1){
+            stage--;
+            stageInstance = 'stage' + stage + 'Instance';
+            window[stageInstance].reset();
+        }
+    } else if (keyCode === 40) { // Down arrow key
+        if(stage < maxStage){
+            stage++;
+            stageInstance = 'stage' + stage + 'Instance';
+            window[stageInstance].reset();
+        }else{
+          window[stageInstance].progress();
+        }
+    } else if (keyCode === 13) { // Enter key
+        window[stageInstance].progress();
+    }
+  });
+
+</script>
+</body>
+</html>
