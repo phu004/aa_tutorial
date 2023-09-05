@@ -117,20 +117,22 @@ class Triangle_TAA {
                     this.blendFrame[i].pixelColor = "#" + lerpColor(historyColor.slice(1), currentColor.slice(1), this.modulationFactor);
                     this.blendFrame[i].blendingStage = 0;
                 }else{
-                    /*let historyColor = this.previousFrame[i].pixelColor;
-                    let currentColor = this.currentFrame[i].pixelColor;
-                    if(historyColor == "#A3D8EF" && currentColor == "#A3D8EF"){
+                    if(stage == 4){
+                        let historyColor = this.previousFrame[i].pixelColor;
+                        let currentColor = this.currentFrame[i].pixelColor;
+                        if(historyColor == "#A3D8EF" && currentColor == "#A3D8EF"){
+                            this.blendFrame[i].blendingStage = 0;
+                            this.blendFrame[i].pixelColor = "#A3D8EF";
+                            continue;
+                        }
+                        let nearColorsHex  = [this.currentFrame[i + 1].pixelColor, this.currentFrame[i + this.w].pixelColor, this.currentFrame[i - 1].pixelColor, this.currentFrame[i - this.w].pixelColor]
+                        historyColor = getClampedColor(currentColor, nearColorsHex, historyColor);
+                        const distance = colorDistance(historyColor, currentColor);
+                        if(distance > this.stillness_threshold)
+                            historyColor = currentColor;
+                        this.blendFrame[i].pixelColor = "#" + lerpColor(historyColor.slice(1), currentColor.slice(1), this.modulationFactor);
                         this.blendFrame[i].blendingStage = 0;
-                        this.blendFrame[i].pixelColor = "#A3D8EF";
-                        continue;
                     }
-                    let nearColorsHex  = [this.currentFrame[i + 1].pixelColor, this.currentFrame[i + this.w].pixelColor, this.currentFrame[i - 1].pixelColor, this.currentFrame[i - this.w].pixelColor]
-                    historyColor = getClampedColor(currentColor, nearColorsHex, historyColor);
-                    const distance = colorDistance(historyColor, currentColor);
-                    if(distance > this.stillness_threshold)
-                        historyColor = currentColor;
-                    this.blendFrame[i].pixelColor = "#" + lerpColor(historyColor.slice(1), currentColor.slice(1), this.modulationFactor);
-                    this.blendFrame[i].blendingStage = 0;*/
                 }
 
             }
